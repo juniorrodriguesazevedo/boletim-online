@@ -42,7 +42,7 @@
                             <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ getRole($user->roles) }}</td>
+                                <td>{{ $user->roles[0]->description ?? 'Sem função' }}</td>
                                 <td>{!! status($user->status) !!}</td>
                                 <td class="btn-toolbar">
                                     <div class="btn-group mr-1">

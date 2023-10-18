@@ -31,7 +31,7 @@
                             <tr>
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->description }}</td>
-                                <td>{{ $role->created_at }}</td>
+                                <td>{{ $role->created_at->format('d/m/Y') }}</td>
                                 <td class="btn-toolbar">
                                     <div class="btn-group mr-1">
                                         <a href="{{ route('roles.show', $role->id) }}" class="btn btn-info btn-sm btn-round btn-icon">

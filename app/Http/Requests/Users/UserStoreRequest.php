@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Users;
 
 use App\Enums\RoleEnum;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserStoreRequest extends FormRequest
@@ -29,24 +30,15 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255'],
-            'cns' => ['nullable', 'size:15', 'unique:users,cns',],
             'email' => ['required', 'email', 'unique:users,email', 'confirmed'],
             'password' => ['required', 'confirmed', 'min:8'],
-            'role_id' => [
-                'required', 'exists:roles,id', function ($attribute, $value, $fail) {
-                    if (!in_array($value, [RoleEnum::DIRECTOR, RoleEnum::PROFESSIONAL])) {
-                        $fail('Inválido!');
-                    }
-                }
-            ],
+            'role_id' => ['required', Rule::in([RoleEnum::ADMIN, RoleEnum::TEACHER])],
             'status' => ['required', 'boolean'],
-            'color' => ['nullable'],
-            'naturalness' => ['nullable'],
             'rg' => ['nullable', 'max:10'],
-            'phone' => ['nullable'],
+            'phone' => ['required'],
             'sex' => ['required', 'in:M,F'],
-            'birth_date' => ['nullable', 'date'],
-            'cpf' => ['nullable', 'size:11', 'unique:users,cpf']
+            'birth_date' => ['required', 'date'],
+            'cpf' => ['required', 'size:11', 'unique:users,cpf']
         ];
     }
 }

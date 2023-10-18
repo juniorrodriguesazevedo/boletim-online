@@ -45,14 +45,6 @@
                     <div class="card-deck">
                         <div class="card m-2 shadow-sm">
                             <div class="card-body">
-                                <p><strong>Cartão Nacinal de Saúde (CNS): </strong></p>
-                                <p class="card-text">
-                                    {{ $user->cns ?? 'NÃO INFORMADO' }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="card m-2 shadow-sm">
-                            <div class="card-body">
                                 <p><strong>Data de Nascimento: </strong></p>
                                 <p class="card-text">
                                     {{ $user->birth_date ? formatDate($user->birth_date) : 'NÃO INFORMADO' }}
@@ -67,24 +59,8 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="card m-2 shadow-sm">
-                            <div class="card-body">
-                                <p><strong>Cor/Raça: </strong></p>
-                                <p class="card-text">
-                                    {{ $user->color ?? 'NÃO INFORMADO' }}
-                                </p>
-                            </div>
-                        </div>
                     </div>
                     <div class="card-deck">
-                        <div class="card m-2 shadow-sm">
-                            <div class="card-body">
-                                <p><strong>Naturalidade: </strong></p>
-                                <p class="card-text">
-                                    {{ $user->naturalness ?? 'NÃO INFORMADO' }}
-                                </p>
-                            </div>
-                        </div>
                         <div class="card m-2 shadow-sm">
                             <div class="card-body">
                                 <p><strong>Telefone: </strong></p>
@@ -95,17 +71,9 @@
                         </div>
                         <div class="card m-2 shadow-sm">
                             <div class="card-body">
-                                <p><strong>CBO: </strong></p>
-                                <p class="card-text">
-                                    {{ $user->cbo->name ?? 'NÃO INFORMADO' }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="card m-2 shadow-sm">
-                            <div class="card-body">
                                 <p><strong>Função: </strong></p>
                                 <p class="card-text">
-                                    {{ getRole($user->roles) }}
+                                    {{ $user->roles[0]->description ?? 'Sem função' }}
                                 </p>
                             </div>
                         </div>

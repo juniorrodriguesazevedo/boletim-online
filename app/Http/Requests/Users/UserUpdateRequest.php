@@ -28,12 +28,9 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => ['nullable', 'min:3', 'max:255'],
-            'cns' => ['nullable', 'size:15', "unique:users,cns,{$this->user->id},id"],
             'email' => ['nullable', 'email', "unique:users,email,{$this->user->id},id", 'confirmed'],
             'password' => ['nullable', 'confirmed', 'min:8'],
             'status' => ['nullable', 'boolean'],
-            'color' => ['nullable'],
-            'naturalness' => ['nullable'],
             'rg' => ['nullable', 'max:10'],
             'phone' => ['nullable'],
             'sex' => ['nullable', 'in:M,F'],

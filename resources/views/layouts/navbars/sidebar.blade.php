@@ -1,19 +1,19 @@
 <div class="sidebar">
     <div class="sidebar-wrapper">
         <div class="logo text-center">
-            <a href="{{ route('consultation-forms.index') }}" class="simple-text logo-normal">Hospital de Itacajá</a>
+            <a href="" class="simple-text logo-normal">TANCREDO NEVES</a>
         </div>
         <ul class="nav">
 
             <li @if ($pageSlug == 'consultation-forms') class="active " @endif>
-                <a href="{{ route('consultation-forms.index') }}">
+                <a href="">
                     <i class="fa fa-ambulance"></i>
                     <p>Consultas</p>
                 </a>
             </li>
 
             <li @if ($pageSlug == 'patients') class="active " @endif>
-                <a href="{{ route('patients.index') }}">
+                <a href="">
                     <i class="fa fa-address-card"></i>
                     <p>Pacientes</p>
                 </a>
@@ -28,31 +28,31 @@
                 <div class="collapse" id="collapseInformacao" style="">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'cbos') class="active" @endif>
-                            <a href="{{ route('cbos.index') }}">
+                            <a href="">
                                 <i class="fa fa-th-list"></i>
                                 <p>CBOs</p>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'cids') class="active" @endif>
-                            <a href="{{ route('cids.index') }}">
+                            <a href="">
                                 <i class="fa fa-th-list"></i>
                                 <p>CIDs</p>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'services') class="active" @endif>
-                            <a href="{{ route('services.index') }}">
+                            <a href="">
                                 <i class="fa fa-th-list"></i>
                                 <p>Serviços</p>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'classifications') class="active" @endif>
-                            <a href="{{ route('classifications.index') }}">
+                            <a href="">
                                 <i class="fa fa-th-list"></i>
                                 <p>Classificações</p>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'procedures') class="active" @endif>
-                            <a href="{{ route('procedures.index') }}">
+                            <a href="">
                                 <i class="fa fa-medkit"></i>
                                 <p>Procedimentos</p>
                             </a>
@@ -62,7 +62,7 @@
             </li>
 
             <li @if ($pageSlug == 'tickets') class="active " @endif>
-                <a href="{{ route('tickets.index') }}">
+                <a href="">
                     <i class="fa fa-envelope"></i>
                     <p>Suporte</p>
                 </a>

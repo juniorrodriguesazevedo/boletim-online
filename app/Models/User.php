@@ -11,11 +11,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -33,12 +30,10 @@ class User extends Authenticatable
         'birth_date',
         'cpf',
         'rg',
-        'cns',
         'phone',
         'sex',
-        'color',
-        'naturalness',
         'status',
+        'role_id'
     ];
 
     public function getActivitylogOptions(): LogOptions
@@ -50,11 +45,8 @@ class User extends Authenticatable
                 'birth_date',
                 'cpf',
                 'rg',
-                'cns',
                 'phone',
                 'sex',
-                'color',
-                'naturalness',
                 'status',
             ])
             ->useLogName('Usuários');
@@ -87,24 +79,10 @@ class User extends Authenticatable
         );
     }
 
-    protected function cns(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string | null $value) => $value ? formatCNS($value) : null,
-        );
-    }
-
     protected function phone(): Attribute
     {
         return Attribute::make(
             get: fn (string | null $value) => $value ? formatPhone($value) : null,
-        );
-    }
-
-    protected function cep(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string $value) => $value ? formatCEP($value) : null,
         );
     }
 
@@ -119,5 +97,4 @@ class User extends Authenticatable
     {
         $query->where('status', 1);
     }
-
 }

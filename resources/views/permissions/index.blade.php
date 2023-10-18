@@ -31,7 +31,7 @@
                             <tr>
                                 <td>{{ $permission->name }}</td>
                                 <td>{{ $permission->description }}</td>
-                                <td>{{ $permission->created_at }}</td>
+                                <td>{{ $permission->created_at->format('d/m/Y') }}</td>
                                 <td class="btn-toolbar">
                                     <div class="btn-group mr-1">
                                         <a href="{{ route('permissions.show', $permission->id) }}" class="btn btn-info btn-sm btn-round btn-icon">

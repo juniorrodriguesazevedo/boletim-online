@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("role:super_admin|director");
+        $this->middleware("role:super_admin|admin");
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +27,9 @@ class UserController extends Controller
 
         $users = User::when(!empty($search), function ($query) use ($search) {
             $query->where('name', 'LIKE', "%$search%");
-        })->orderBy('name')->paginate(10);
+        })->where('role_id', '!=', RoleEnum::SUPER_ADMIN)
+            ->orderBy('name')
+            ->paginate(10);
 
         return view('users.index', compact('users'));
     }
@@ -39,7 +41,7 @@ class UserController extends Controller
     {
         $roles = Role::whereNotIn('id', [RoleEnum::SUPER_ADMIN])->get();
 
-        return view('users.create', compact('cbos', 'roles'));
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -69,7 +71,7 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        return view('users.edit', compact('user', 'cbos'));
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -90,6 +92,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->update(['status' => false]);
+
+        return redirect()->route('users.edit', $user->id)
+            ->withStatus('Usuário desativado com sucesso!');
     }
 }

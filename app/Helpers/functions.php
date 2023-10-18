@@ -9,7 +9,7 @@ function status($status): string
     return $status == 1 ? '<span class="badge badge-info">Ativo</span>' : '<span class="badge badge-danger">Inativo</span>';
 }
 
-function getRole($value): string
+function getRoleName($value): string
 {
     $role =  str_replace(['[', '"', ']'], '', $value->pluck('description'));
 

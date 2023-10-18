@@ -21,7 +21,7 @@ Auth::routes([
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/home', function() {
-        return redirect()->route('consultation-forms.index');
+        return redirect()->route('profiles.edit');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profiles.edit');
