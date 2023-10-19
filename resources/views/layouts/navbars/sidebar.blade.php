@@ -5,10 +5,10 @@
         </div>
         <ul class="nav">
 
-            <li @if ($pageSlug == 'consultation-forms') class="active " @endif>
-                <a href="">
-                    <i class="fa fa-ambulance"></i>
-                    <p>Consultas</p>
+            <li @if ($pageSlug == 'class_rooms') class="active " @endif>
+                <a href="{{ route('class-rooms.index') }}">
+                    <i class="fa fa-graduation-cap"></i>
+                    <p>Turmas</p>
                 </a>
             </li>
 

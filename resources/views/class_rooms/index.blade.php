@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Dispositivos', 'pageSlug' => 'devices'])
+@extends('layouts.app', ['page' => 'Turmas', 'pageSlug' => 'class_rooms'])
 
 @section('content')
 <div class="row">
@@ -7,17 +7,17 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-8">
-                        <h3 class="card-title">Dispositivos</h3>
+                        <h3 class="card-title">Turmas</h3>
                     </div>
 
                     <div class="col-4 text-right">
-                        <a href="{{ route('devices.create') }}" class="btn btn-sm btn-primary">Adicionar Novo</a>
+                        <a href="{{ route('class-rooms.create') }}" class="btn btn-sm btn-primary">Adicionar Novo</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <table class="table table-striped">
-                    <caption><strong>N. Registros: {{ $devices->count() }}</strong></caption>
+                    <caption><strong>N. Registros: {{ $classCooms->count() }}</strong></caption>
                       <thead class="text-primary">
                         <tr>
                           <th scope="col">Nome</th>
@@ -27,24 +27,24 @@
                         </tr>
                       </thead>
                       <tbody>
-                          @foreach ($devices as $device)
+                          @foreach ($classCooms as $classCoom)
                             <tr>
-                                <td>{{ $device->name }}</td>
-                                <td>{{ $device->ip }}</td>
-                                <td>{!! status($device->status) !!}</td>
+                                <td>{{ $classCoom->name }}</td>
+                                <td>{{ $classCoom->ip }}</td>
+                                <td>{!! status($classCoom->status) !!}</td>
                                 <td class="btn-toolbar">
                                     <div class="btn-group mr-1">
-                                        <a href="{{ route('devices.show', $device->id) }}" class="btn btn-info btn-sm btn-round btn-icon">
+                                        <a href="{{ route('class-rooms.show', $classCoom->id) }}" class="btn btn-info btn-sm btn-round btn-icon">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </div>
                                     <div class="btn-group mr-1">
-                                        <a href="{{ route('devices.edit', $device->id) }}" class="btn btn-success btn-sm btn-round btn-icon">
+                                        <a href="{{ route('class-rooms.edit', $classCoom->id) }}" class="btn btn-success btn-sm btn-round btn-icon">
                                             <i class="fas fa-tools"></i>
                                         </a>
                                     </div>
                                     <div class="btn-group">
-                                        <form action="{{ route('devices.destroy', $device->id) }}" id="form-{{ $device->id }}" method="post">
+                                        <form action="{{ route('class-rooms.destroy', $classCoom->id) }}" id="form-{{ $classCoom->id }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="button" rel="tooltip" class="btn-delete btn btn-danger btn-sm btn-round btn-icon">
@@ -60,7 +60,7 @@
             </div>
             <div class="card-footer py-4">
                 <nav class="d-flex justify-content-start" aria-label="...">
-                    {{ $devices->links() }}
+                    {{ $classCooms->links() }}
                 </nav>
             </div>
         </div>

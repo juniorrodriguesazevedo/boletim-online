@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ActivityController;
+use App\Http\Controllers\Admin\ClassRoomController;
 use App\Http\Controllers\Admin\PermissionController;
 
 Route::get('/', function () {
@@ -21,7 +22,7 @@ Auth::routes([
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/home', function() {
-        return redirect()->route('profiles.edit');
+        return redirect()->route('class-rooms.index');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profiles.edit');
@@ -33,6 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resources([
         'roles' => RoleController::class,
         'users' => UserController::class,
+        'class-rooms' => ClassRoomController::class,
         'permissions' => PermissionController::class,
     ]);
 });
