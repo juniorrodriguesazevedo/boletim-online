@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Enums\RoleEnum;
+use App\Models\Student;
 use App\Models\ClassRoom;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Discipline;
-use App\Models\User;
+use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\ClassRooms\ClassRoomStoreRequest;
+use App\Http\Requests\ClassRooms\ClassRoomUpdateRequest;
 
 class ClassRoomController extends Controller
 {
@@ -17,7 +21,7 @@ class ClassRoomController extends Controller
      */
     public function index(): View
     {
-        $classCooms = ClassRoom::paginate();
+        $classCooms = ClassRoom::orderBy('year')->paginate();
 
         return view('class_rooms.index', compact('classCooms'));
     }
@@ -27,18 +31,30 @@ class ClassRoomController extends Controller
      */
     public function create(): View
     {
-        $disciplines = Discipline::all();
-        $teachers = User::where('role_id', RoleEnum::TEACHER)->active()->get();
+        $students = Student::orderBy('name')->get();
+        $disciplines = Discipline::orderBy('name')->get();
+        $teachers = User::where('role_id', RoleEnum::TEACHER)->get();
 
-        return view('class_rooms.create', compact('disciplines', 'teachers'));
+        return view('class_rooms.create', compact('disciplines', 'teachers', 'students'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ClassRoomStoreRequest $request): RedirectResponse
     {
-        dd($request->all());
+        $data = $request->validated();
+
+        $classRoom = ClassRoom::create($data);
+
+        if ($classRoom) {
+            $classRoom->students()->attach($data['students']);
+            $classRoom->disciplines()->attach($data['disciplines']);
+            $classRoom->users()->attach($data['teachers']);
+        }
+
+        return redirect()->route('class-rooms.show', $classRoom->id)
+            ->withStatus('Turma cadastrado com sucesso!');
     }
 
     /**
@@ -46,23 +62,36 @@ class ClassRoomController extends Controller
      */
     public function show(ClassRoom $classRoom)
     {
-        //
+        return view('class_rooms.show', compact('classRoom'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ClassRoom $classRoom)
+    public function edit(ClassRoom $classRoom): View
     {
-        //
+        $students = Student::orderBy('name')->get();
+        $disciplines = Discipline::orderBy('name')->get();
+        $teachers = User::where('role_id', RoleEnum::TEACHER)->get();
+
+        return view('class_rooms.create', compact('classRoom', 'disciplines', 'teachers', 'students'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ClassRoom $classRoom)
+    public function update(ClassRoomUpdateRequest $request, ClassRoom $classRoom)
     {
-        //
+        $data = $request->validated();
+
+        $classRoom->update($data);
+
+        $classRoom->students()->sync($data['students']);
+        $classRoom->disciplines()->sync($data['disciplines']);
+        $classRoom->users()->sync($data['teachers']);
+
+        return redirect()->route('class-rooms.edit', $classRoom->id)
+            ->withStatus('Turma atualizado com sucesso!');
     }
 
     /**
@@ -71,5 +100,14 @@ class ClassRoomController extends Controller
     public function destroy(ClassRoom $classRoom)
     {
         //
+    }
+
+    public function pdf(ClassRoom $classRoom)
+    {
+        $pdf = App::make('dompdf.wrapper');
+        // $pdf->setPaper('a4', 'landscape');
+        $pdf->loadView('class_rooms.pdf', compact('classRoom'));
+
+        return $pdf->stream("turma-$classRoom->name.pdf");
     }
 }

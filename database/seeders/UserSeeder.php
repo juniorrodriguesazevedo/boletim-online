@@ -20,6 +20,20 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'role_id' => RoleEnum::SUPER_ADMIN,
             'password' => 'secret',
-        ])->assignRole('super_admin');
+        ])->assignRole(RoleEnum::SUPER_ADMIN);
+
+        User::create([
+            'name' => 'Professor 1',
+            'email' => 'professor1@admin.com',
+            'role_id' => RoleEnum::TEACHER,
+            'password' => 'secret',
+        ])->assignRole(RoleEnum::TEACHER);
+
+        User::create([
+            'name' => 'Professor 2',
+            'email' => 'professor2@admin.com',
+            'role_id' => RoleEnum::TEACHER,
+            'password' => 'secret',
+        ])->assignRole(RoleEnum::TEACHER);
     }
 }

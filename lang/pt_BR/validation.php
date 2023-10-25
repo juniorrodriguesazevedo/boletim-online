@@ -225,7 +225,10 @@ return [
         'district' => 'bairro',
         'patient_id' => 'paciente',
         'procedures' => 'procedimentos',
-        'users' => 'atendentes'
+        'users' => 'atendentes',
+        'teachers' => 'professores',
+        'students' => 'alunos',
+        'disciplines' => 'disciplinas'
     ],
 
 ];

@@ -13,7 +13,9 @@
         <link rel="icon" type="image/png" href="{{ asset('white') }}/img/favicon.png">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
-        <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet">
+       {{--  <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet"> --}}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
         <!-- Icons -->
         <link href="{{ asset('white') }}/css/nucleo-icons.css" rel="stylesheet" />
         <!-- CSS -->

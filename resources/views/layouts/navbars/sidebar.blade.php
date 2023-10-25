@@ -12,10 +12,10 @@
                 </a>
             </li>
 
-            <li @if ($pageSlug == 'patients') class="active " @endif>
-                <a href="">
-                    <i class="fa fa-address-card"></i>
-                    <p>Pacientes</p>
+            <li @if ($pageSlug == 'students') class="active " @endif>
+                <a href="{{ route('students.index') }}">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <p>Alunos</p>
                 </a>
             </li>
 

@@ -12,4 +12,9 @@ class Discipline extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function classrooms()
+    {
+        return $this->belongsToMany(ClassRoom::class, 'classroom_discipline')->withTimestamps();
+    }
 }

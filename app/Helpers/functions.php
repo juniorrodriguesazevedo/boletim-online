@@ -2,11 +2,21 @@
 
 use App\Enums\TicketEnum;
 
-use function PHPUnit\Framework\returnSelf;
-
 function status($status): string
 {
     return $status == 1 ? '<span class="badge badge-info">Ativo</span>' : '<span class="badge badge-danger">Inativo</span>';
+}
+
+function period($period): string
+{
+    switch ($period) {
+        case 1:
+            return '<span class="badge badge-info">MANHÃ</span>';
+        case 2:
+            return '<span class="badge badge-warning">TARDE</span>';
+        case 3:
+            return '<span class="badge badge-dark">NOITE</span>';
+    }
 }
 
 function getRoleName($value): string
@@ -63,7 +73,7 @@ function ticketStatus($status): string
 {
     switch ($status) {
         case TicketEnum::OPEN:
-           return '<span class="badge badge-info">ABERTO</span>';
+            return '<span class="badge badge-info">ABERTO</span>';
         case TicketEnum::ANSWERED:
             return '<span class="badge badge-warning">RESPONDIDO</span>';
         case TicketEnum::FINISHED:

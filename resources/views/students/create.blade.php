@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Turmas', 'pageSlug' => 'class_rooms'])
+@extends('layouts.app', ['page' => 'Alunos', 'pageSlug' => 'students'])
 
 @section('content')
     <div class="row">
@@ -22,5 +22,3 @@
         </div>
     </div>
 @endsection
-
-@include('uteis.select2')

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\ClassRoomController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -25,6 +26,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         return redirect()->route('class-rooms.index');
     });
 
+    // PDFs
+    Route::get('/class-rooms/pdf/{class_room}', [ClassRoomController::class, 'pdf'])->name('class-rooms.pdf');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profiles.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profiles.update');
 
@@ -34,6 +38,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resources([
         'roles' => RoleController::class,
         'users' => UserController::class,
+        'students' => StudentController::class,
         'class-rooms' => ClassRoomController::class,
         'permissions' => PermissionController::class,
     ]);

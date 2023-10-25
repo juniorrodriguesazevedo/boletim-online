@@ -97,4 +97,9 @@ class User extends Authenticatable
     {
         $query->where('status', 1);
     }
+
+    public function classrooms()
+    {
+        return $this->belongsToMany(ClassRoom::class, 'classroom_user')->withTimestamps();
+    }
 }
