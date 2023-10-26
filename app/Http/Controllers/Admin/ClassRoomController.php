@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\ClassRoom;
 use Illuminate\View\View;
 use App\Models\Discipline;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -19,11 +20,18 @@ class ClassRoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $classCooms = ClassRoom::orderBy('year')->paginate();
+        $classRooms = ClassRoom::
+        when(!empty($request->search), function ($query) use ($request) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        })
+        ->when(!empty($request->code), function ($query) use ($request) {
+                $query->where('code', $request->code);
+        })
+        ->orderBy('year')->paginate();
 
-        return view('class_rooms.index', compact('classCooms'));
+        return view('class_rooms.index', compact('classRooms'));
     }
 
     /**

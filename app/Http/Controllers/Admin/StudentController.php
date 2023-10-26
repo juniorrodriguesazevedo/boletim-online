@@ -6,17 +6,29 @@ use App\Models\Student;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ClassRoom;
 
 class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $students = Student::orderBy('name')->paginate();
+        $classroom = ClassRoom::all();
 
-        return view('students.index', compact('students'));
+        $students = Student::with('classrooms')
+        ->when(!empty($request->search), function ($query) use ($request) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        })
+        ->when(!empty($request->classroom_id), function ($query) use ($request) {
+            $query->whereHas('classrooms', function ($query) use ($request) {
+                $query->where('class_rooms.id', $request->classroom_id);
+            });
+        })
+        ->orderBy('name')->paginate();
+
+        return view('students.index', compact('students', 'classroom'));
     }
 
     /**

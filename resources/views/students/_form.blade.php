@@ -4,7 +4,7 @@
 ]) !!}
 <div class="row">
     <div class="col-md-3">
-        {!! Form::label('code', 'Código') !!}
+        {!! Form::label('code', 'Código', ['class' => 'required']) !!}
         {!! Form::text('code', isset($classRoom) ? $classRoom->code : null, ['class' => 'form-control']) !!}
         @include('alerts.feedback', ['field' => 'code'])
     </div>

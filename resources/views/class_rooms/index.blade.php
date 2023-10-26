@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="card ">
+        <div class="card">
             <div class="card-header">
                 <div class="row">
                     <div class="col-8">
@@ -15,9 +15,27 @@
                     </div>
                 </div>
             </div>
+            {!! Form::open(['route' => 'class-rooms.index', 'method' => 'get']) !!}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        {!! Form::label('search', 'Buscar por nome') !!}
+                        {!! Form::text('search', request('search'), ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="col-md-3">         
+                        {!! Form::label('code', 'Buscar por Código') !!}
+                        {!! Form::text('code', request('code'), ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="col-5">
+                        {!! Form::submit('Pesquisar', ['class' => 'btn btn-sm btn-primary']) !!}
+                    </div>
+                </div>
+            </div>
+            {!! Form::close() !!}
+
             <div class="card-body">
                 <table class="table table-striped">
-                    <caption><strong>N. Registros: {{ $classCooms->count() }}</strong></caption>
+                    <caption><strong>N. Registros: {{ $classRooms->count() }}</strong></caption>
                       <thead class="text-primary">
                         <tr>
                           <th scope="col">Código</th>
@@ -28,25 +46,25 @@
                         </tr>
                       </thead>
                       <tbody>
-                          @foreach ($classCooms as $classCoom)
+                          @foreach ($classRooms as $classRoom)
                             <tr>
-                                <td>{{ $classCoom->code ?? 'SEM CÓDIGO' }}</td>
-                                <td>{{ $classCoom->name }}</td>
-                                <td>{!! period($classCoom->period) !!}</td>
-                                <td>{{ $classCoom->year }}</td>
+                                <td>{{ $classRoom->code ?? 'SEM CÓDIGO' }}</td>
+                                <td>{{ $classRoom->name }}</td>
+                                <td>{!! period($classRoom->period) !!}</td>
+                                <td>{{ $classRoom->year }}</td>
                                 <td class="btn-toolbar">
                                     <div class="btn-group mr-1">
-                                        <a href="{{ route('class-rooms.show', $classCoom->id) }}" class="btn btn-info btn-sm btn-round btn-icon">
+                                        <a href="{{ route('class-rooms.show', $classRoom->id) }}" class="btn btn-info btn-sm btn-round btn-icon">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </div>
                                     <div class="btn-group mr-1">
-                                        <a href="{{ route('class-rooms.edit', $classCoom->id) }}" class="btn btn-success btn-sm btn-round btn-icon">
+                                        <a href="{{ route('class-rooms.edit', $classRoom->id) }}" class="btn btn-success btn-sm btn-round btn-icon">
                                             <i class="fas fa-tools"></i>
                                         </a>
                                     </div>
                                    {{--  <div class="btn-group">
-                                        <form action="{{ route('class-rooms.destroy', $classCoom->id) }}" id="form-{{ $classCoom->id }}" method="post">
+                                        <form action="{{ route('class-rooms.destroy', $classRoom->id) }}" id="form-{{ $classRoom->id }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="button" rel="tooltip" class="btn-delete btn btn-danger btn-sm btn-round btn-icon">
@@ -62,7 +80,7 @@
             </div>
             <div class="card-footer py-4">
                 <nav class="d-flex justify-content-start" aria-label="...">
-                    {{ $classCooms->links() }}
+                    {{ $classRooms->links() }}
                 </nav>
             </div>
         </div>
