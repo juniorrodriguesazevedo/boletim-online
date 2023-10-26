@@ -19,55 +19,6 @@
                 </a>
             </li>
 
-            <li>
-                <a data-toggle="collapse" href="#collapseInformacao" aria-expanded="false" class="collapsed">
-                    <i class="fa fa-heartbeat"></i>
-                    <span class="nav-link-text">Info. Clínicas</span>
-                    <b class="caret mt-1"></b>
-                </a>
-                <div class="collapse" id="collapseInformacao" style="">
-                    <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'cbos') class="active" @endif>
-                            <a href="">
-                                <i class="fa fa-th-list"></i>
-                                <p>CBOs</p>
-                            </a>
-                        </li>
-                        <li @if ($pageSlug == 'cids') class="active" @endif>
-                            <a href="">
-                                <i class="fa fa-th-list"></i>
-                                <p>CIDs</p>
-                            </a>
-                        </li>
-                        <li @if ($pageSlug == 'services') class="active" @endif>
-                            <a href="">
-                                <i class="fa fa-th-list"></i>
-                                <p>Serviços</p>
-                            </a>
-                        </li>
-                        <li @if ($pageSlug == 'classifications') class="active" @endif>
-                            <a href="">
-                                <i class="fa fa-th-list"></i>
-                                <p>Classificações</p>
-                            </a>
-                        </li>
-                        <li @if ($pageSlug == 'procedures') class="active" @endif>
-                            <a href="">
-                                <i class="fa fa-medkit"></i>
-                                <p>Procedimentos</p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li @if ($pageSlug == 'tickets') class="active " @endif>
-                <a href="">
-                    <i class="fa fa-envelope"></i>
-                    <p>Suporte</p>
-                </a>
-            </li>
-
           {{--   <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel"></i>

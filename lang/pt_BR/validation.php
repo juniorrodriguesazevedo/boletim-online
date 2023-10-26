@@ -228,7 +228,10 @@ return [
         'users' => 'atendentes',
         'teachers' => 'professores',
         'students' => 'alunos',
-        'disciplines' => 'disciplinas'
+        'disciplines' => 'disciplinas',
+        'birth_certificate' => 'certidão de nascimento',
+        'phone_first' => 'telefone contato',
+        'phone_second' => 'telefone contato secundário'
     ],
 
 ];

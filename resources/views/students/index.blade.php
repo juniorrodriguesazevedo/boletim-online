@@ -15,27 +15,6 @@
                     </div>
                 </div>
             </div>
-
-            {!! Form::open(['route' => 'students.index', 'method' => 'get']) !!}
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        {!! Form::label('search', 'Buscar por nome') !!}
-                        {!! Form::text('search', request('search'), ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="col-md-3">         
-                    {!! Form::label('classroom_id', 'Buscar por turma') !!}
-                    {!! Form::select('classroom_id', $classroom->pluck('name', 'id'), request('classroom_id'), ['class' => 'form-control select2', 'placeholder' => 'Selecione']) !!}
-                    </div>
-                    <div class="col-5">
-                        <label></label>
-                        {!! Form::submit('Pesquisar', ['class' => 'btn btn-sm btn-primary']) !!}
-                    </div>
-                </div>
-            </div>
-            {!! Form::close() !!}
-
-
             <div class="card-body">
                 <table class="table table-striped">
                     <caption><strong>N. Registros: {{ $students->count() }}</strong></caption>

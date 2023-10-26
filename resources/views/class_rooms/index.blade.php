@@ -15,24 +15,6 @@
                     </div>
                 </div>
             </div>
-            {!! Form::open(['route' => 'class-rooms.index', 'method' => 'get']) !!}
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        {!! Form::label('search', 'Buscar por nome') !!}
-                        {!! Form::text('search', request('search'), ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="col-md-3">         
-                        {!! Form::label('code', 'Buscar por Código') !!}
-                        {!! Form::text('code', request('code'), ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="col-5">
-                        {!! Form::submit('Pesquisar', ['class' => 'btn btn-sm btn-primary']) !!}
-                    </div>
-                </div>
-            </div>
-            {!! Form::close() !!}
-
             <div class="card-body">
                 <table class="table table-striped">
                     <caption><strong>N. Registros: {{ $classRooms->count() }}</strong></caption>

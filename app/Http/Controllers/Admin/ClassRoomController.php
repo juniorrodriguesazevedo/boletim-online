@@ -22,14 +22,7 @@ class ClassRoomController extends Controller
      */
     public function index(Request $request): View
     {
-        $classRooms = ClassRoom::
-        when(!empty($request->search), function ($query) use ($request) {
-            $query->where('name', 'like', '%' . $request->search . '%');
-        })
-        ->when(!empty($request->code), function ($query) use ($request) {
-                $query->where('code', $request->code);
-        })
-        ->orderBy('year')->paginate();
+        $classRooms = ClassRoom::orderBy('year')->paginate();
 
         return view('class_rooms.index', compact('classRooms'));
     }
