@@ -6,6 +6,8 @@ use App\Models\Student;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Students\StudentsStoreRequest;
+use App\Http\Requests\Students\StudentsUpdateRequest;
 use App\Models\ClassRoom;
 
 class StudentController extends Controller
@@ -42,7 +44,7 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StudentsStoreRequest $request)
     {
         //
     }
@@ -66,7 +68,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(StudentsUpdateRequest $request, Student $student)
     {
         //
     }
