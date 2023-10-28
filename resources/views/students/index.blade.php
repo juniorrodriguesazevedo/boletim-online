@@ -20,6 +20,7 @@
                     <caption><strong>N. Registros: {{ $students->count() }}</strong></caption>
                       <thead class="text-primary">
                         <tr>
+                          <th scope="col">Código</th>
                           <th scope="col">Nome</th>
                           <th scope="col">Nome da Mãe</th>
                           <th scope="col">Telefone</th>
@@ -30,6 +31,7 @@
                       <tbody>
                           @foreach ($students as $student)
                             <tr>
+                                <td>#{{ $student->id }}</td>
                                 <td>{{ $student->name }}</td>
                                 <td>{{ $student->name_mother }}</td>
                                 <td>{{ $student->phone_first }}</td>

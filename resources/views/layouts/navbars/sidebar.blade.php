@@ -19,7 +19,14 @@
                 </a>
             </li>
 
-          {{--   <li>
+            <li @if ($pageSlug == 'notes') class="active " @endif>
+                <a href="{{ route('notes.index') }}">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <p>Notas</p>
+                </a>
+            </li>
+
+            {{--   <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel"></i>
                     <span class="nav-link-text">{{ __('Laravel Examples') }}</span>

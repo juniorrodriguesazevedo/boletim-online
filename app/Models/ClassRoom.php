@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ClassRoom extends Model
@@ -29,5 +30,10 @@ class ClassRoom extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'classroom_user')->withTimestamps();
+    }
+
+    public function notes(): HasMany
+    {
+        return $this->hasMany(Note::class);
     }
 }

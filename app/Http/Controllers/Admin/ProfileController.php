@@ -10,11 +10,6 @@ use App\Http\Requests\Profiles\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('role:super_admin|director|professional');
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
