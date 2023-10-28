@@ -100,14 +100,13 @@
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
-                        <caption><strong>N. Registros: {{ $classRoom->students->count() }}</strong></caption>
+                        <caption><strong>N. Alunos: {{ $classRoom->students->count() }}</strong></caption>
                         <thead class="text-primary">
                             <tr>
                                 <th scope="col">Código</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Nome da Mãe</th>
                                 <th scope="col">Telefone</th>
-                                <th scope="col" style="width: 82px">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -117,20 +116,6 @@
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->name_mother }}</td>
                                     <td>{{ $student->phone_first }}</td>
-                                    <td class="btn-toolbar">
-                                        <div class="btn-group mr-1">
-                                            <a href="{{ route('class-rooms.show', $student->id) }}"
-                                                class="btn btn-info btn-sm btn-round btn-icon">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </div>
-                                        <div class="btn-group mr-1">
-                                            <a href="{{ route('class-rooms.edit', $student->id) }}"
-                                                class="btn btn-success btn-sm btn-round btn-icon">
-                                                <i class="fas fa-tools"></i>
-                                            </a>
-                                        </div>
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

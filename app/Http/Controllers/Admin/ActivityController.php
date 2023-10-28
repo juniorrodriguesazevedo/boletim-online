@@ -9,7 +9,7 @@ class ActivityController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:super_admin|director');
+        $this->middleware('role:super_admin|admin');
     }
 
     /**

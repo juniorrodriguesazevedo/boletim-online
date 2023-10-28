@@ -17,6 +17,14 @@ use App\Http\Requests\ClassRooms\ClassRoomUpdateRequest;
 
 class ClassRoomController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admin_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:admin_edit', ['only' => ['edit', 'update']]);
+
+        $this->middleware('permission:teacher_view|admin_view', ['only' => ['show', 'index', 'pdf']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -93,14 +101,6 @@ class ClassRoomController extends Controller
 
         return redirect()->route('class-rooms.edit', $classRoom->id)
             ->withStatus('Turma atualizado com sucesso!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ClassRoom $classRoom)
-    {
-        //
     }
 
     public function pdf(ClassRoom $classRoom)

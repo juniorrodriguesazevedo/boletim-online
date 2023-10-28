@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     });
 
     // PDFs
+    Route::get('/students/pdf/{class_room}/{student}', [StudentController::class, 'pdf'])->name('students.pdf');
     Route::get('/class-rooms/pdf/{class_room}', [ClassRoomController::class, 'pdf'])->name('class-rooms.pdf');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profiles.edit');

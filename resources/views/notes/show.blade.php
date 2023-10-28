@@ -55,7 +55,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($classRoom->students as $student)
+                                @foreach ($classRoom->students->sortBy('name') as $student)
                                     <tr>
                                         <td>#{{ $student->id }}</td>
                                         <td>{{ $student->name }}</td>

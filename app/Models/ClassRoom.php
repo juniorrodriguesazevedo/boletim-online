@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ClassRoom extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $fillable = [
         'code',
@@ -16,6 +19,32 @@ class ClassRoom extends Model
         'period',
         'year'
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'code',
+                'name',
+                'period',
+                'year',
+                'created_at',
+                'updated_at'
+            ])
+            ->useLogName('Turmas');
+    }
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => ucfirst($value),
+        );
+    }
+
+    public function notes(): HasMany
+    {
+        return $this->hasMany(Note::class);
+    }
 
     public function students()
     {
@@ -30,10 +59,5 @@ class ClassRoom extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'classroom_user')->withTimestamps();
-    }
-
-    public function notes(): HasMany
-    {
-        return $this->hasMany(Note::class);
     }
 }

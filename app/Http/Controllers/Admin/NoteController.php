@@ -8,9 +8,15 @@ use Illuminate\View\View;
 use App\Models\Discipline;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 class NoteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:super_admin|admin|teacher');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -25,7 +31,7 @@ class NoteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ClassRoom $classRoom, Discipline $discipline)
+    public function show(ClassRoom $classRoom, Discipline $discipline): View
     {
         $notes = Note::where('class_room_id', $classRoom->id)
             ->where('discipline_id', $discipline->id)
@@ -37,7 +43,7 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ClassRoom $classRoom, Discipline $discipline)
+    public function update(Request $request, ClassRoom $classRoom, Discipline $discipline): RedirectResponse
     {
         foreach ($request->notes as $key => $notes) {
             Note::updateOrCreate([

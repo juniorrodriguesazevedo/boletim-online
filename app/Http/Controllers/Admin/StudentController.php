@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Student;
+use App\Models\ClassRoom;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Students\StudentStoreRequest;
 use App\Http\Requests\Students\StudentUpdateRequest;
 
@@ -14,7 +17,10 @@ class StudentController extends Controller
 {
     public function __construct()
     {
-        
+        $this->middleware('permission:admin_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:admin_edit', ['only' => ['edit', 'update']]);
+
+        $this->middleware('permission:teacher_view|admin_view', ['only' => ['show', 'index', 'pdf']]);
     }
 
     /**
@@ -22,7 +28,11 @@ class StudentController extends Controller
      */
     public function index(Request $request): View
     {
-        $students = Student::orderBy('name')->paginate();
+        $search = $request->search;
+
+        $students = Student::when(!empty($search), function ($query) use ($search) {
+            $query->where('name', 'LIKE', "%$search%");
+        })->orderBy('name')->paginate();
 
         return view('students.index', compact('students'));
     }
@@ -53,7 +63,11 @@ class StudentController extends Controller
      */
     public function show(Student $student): View
     {
-        return view('students.show', compact('student'));
+        $classrooms = $student->classrooms()
+            ->orderBy('year', 'desc')
+            ->get();
+
+        return view('students.show', compact('student', 'classrooms'));
     }
 
     /**
@@ -77,11 +91,25 @@ class StudentController extends Controller
             ->withStatus('Aluno atualizado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Student $student)
+    public function pdf(ClassRoom $classRoom, Student $student): Response
     {
-        //
+        $disciplines = $classRoom->disciplines;
+
+        $notesByDiscipline = [];
+
+        foreach ($disciplines as $discipline) {
+            $notes = $student->notes()
+                ->where('class_room_id', $classRoom->id)
+                ->where('discipline_id', $discipline->id)
+                ->get();
+
+            $notesByDiscipline[$discipline->name] = $notes;
+        }
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->setPaper('a4', 'landscape');
+        $pdf->loadView('students.pdf', compact('classRoom', 'student', 'disciplines', 'notesByDiscipline'));
+
+        return $pdf->stream("$student->id-$classRoom->name.pdf");
     }
 }

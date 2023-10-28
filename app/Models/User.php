@@ -48,10 +48,11 @@ class User extends Authenticatable
                 'phone',
                 'sex',
                 'status',
+                'created_at',
+                'updated_at'
             ])
             ->useLogName('Usuários');
     }
-
 
     /**
      * The attributes that should be hidden for serialization.
@@ -71,6 +72,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => ucfirst($value),
+        );
+    }
 
     protected function cpf(): Attribute
     {
