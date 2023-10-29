@@ -37,8 +37,8 @@ class UserSeeder extends Seeder
         ])->assignRole(RoleEnum::TEACHER);
 
         User::create([
-            'name' => 'Professor 1',
-            'email' => 'admin@admin.com',
+            'name' => 'Secretária',
+            'email' => 'secretaria@admin.com',
             'role_id' => RoleEnum::ADMIN,
             'password' => 'secret',
         ])->assignRole(RoleEnum::ADMIN);
