@@ -60,7 +60,7 @@
                                             <div class="btn-group mr-1">
                                                 <a href="{{ route('notes.show', ['class_room' => $classRoom->id, 'discipline' => $discipline->id]) }}"
                                                     class="btn btn-info ">
-                                                    Lança notas
+                                                    Lançar notas
                                                 </a>
                                             </div>
                                         </td>
