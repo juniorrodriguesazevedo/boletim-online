@@ -19,6 +19,14 @@
                     <div class="card-deck">
                         <div class="card m-2 shadow-sm">
                             <div class="card-body">
+                                <p><strong>Código: </strong></p>
+                                <p class="card-text">
+                                    #{{ $student->id }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card m-2 shadow-sm">
+                            <div class="card-body">
                                 <p><strong>Nome: </strong></p>
                                 <p class="card-text">
                                     {{ $student->name }}
@@ -29,7 +37,7 @@
                             <div class="card-body">
                                 <p><strong>Data Nascimento: </strong></p>
                                 <p class="card-text">
-                                    {{ $student->birth_date }}
+                                    {{ date('d/m/Y', strtotime($student->birth_date)) }}
                                 </p>
                             </div>
                         </div>
@@ -38,14 +46,6 @@
                                 <p><strong>Sexo: </strong></p>
                                 <p class="card-text">
                                     {{ $student->sex == 'M' ? 'Masculino' : 'Feminino' }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="card m-2 shadow-sm">
-                            <div class="card-body">
-                                <p><strong>Status: </strong></p>
-                                <p class="card-text">
-                                    {!! status($student->status) !!}
                                 </p>
                             </div>
                         </div>
@@ -134,6 +134,14 @@
                                 <p><strong>Bairro: </strong></p>
                                 <p class="card-text">
                                     {{ $student->district }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card m-2 shadow-sm">
+                            <div class="card-body">
+                                <p><strong>Status: </strong></p>
+                                <p class="card-text">
+                                    {!! status($student->status) !!}
                                 </p>
                             </div>
                         </div>

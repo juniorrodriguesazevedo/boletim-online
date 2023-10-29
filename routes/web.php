@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BulletinController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\NoteController;
@@ -21,9 +22,14 @@ Auth::routes([
     'confirm' => false
 ]);
 
+Route::middleware(['throttle:4,1'])->group(function () {
+    Route::get('/boletim', [BulletinController::class, 'index'])->name('bulletins.index');
+    Route::post('/boletim', [BulletinController::class, 'store'])->name('bulletins.store');
+});
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
-    Route::get('/home', function() {
+    Route::get('/home', function () {
         return redirect()->route('class-rooms.index');
     });
 
