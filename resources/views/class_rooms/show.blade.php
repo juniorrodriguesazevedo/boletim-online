@@ -103,7 +103,7 @@
                         <caption><strong>N. Alunos: {{ $classRoom->students->count() }}</strong></caption>
                         <thead class="text-primary">
                             <tr>
-                                <th scope="col">Código</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Nome da Mãe</th>
                                 <th scope="col">Telefone</th>

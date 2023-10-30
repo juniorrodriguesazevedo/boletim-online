@@ -87,6 +87,9 @@
 <body>
     <div class="landing-page">
         <header class="header">
+        <div class="menu">
+                <a href="{{ route('bulletins.index') }}">Boletim</a>
+            </div>
             <div class="menu">
                 <a href="{{ route('login') }}">Login</a>
             </div>

@@ -56,16 +56,16 @@
         @include('alerts.feedback', ['field' => 'teachers'])
     </div>
 
-    <div class="col-md-12 mt-3 mb-3">
+    <div class="col-md-12 mt-3" style="margin-bottom: 200px;">
         {!! Form::label('students[]', 'Alunos', ['class' => isset($classRoom) ? '' : 'required']) !!}
-        {!! Form::select('students[]', $students->pluck('name', 'id'), isset($classRoom) ? $classRoom->students : null, [
+        {!! Form::select('students[]', $students->pluck('id_name', 'id'), isset($classRoom) ? $classRoom->students : null, [
             'class' => 'form-control select2-multiple',
             'multiple' => 'multiple',
         ]) !!}
         @include('alerts.feedback', ['field' => 'students'])
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12 text-right">
         {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
     </div>
 </div>

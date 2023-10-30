@@ -62,6 +62,13 @@ class Student extends Model
         );
     }
 
+    protected function idName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => '#' . $this->id . ' - ' . $this->name,
+        );
+    }
+
     protected function nameMother(): Attribute
     {
         return Attribute::make(
@@ -101,7 +108,7 @@ class Student extends Model
     {
         $query->where('status', 1);
     }
-    
+
     public function notes(): HasMany
     {
         return $this->hasMany(Note::class);
