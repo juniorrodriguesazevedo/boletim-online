@@ -14,7 +14,7 @@ class BulletinStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => ['required', 'exists:students,id'],
+            'id' => ['required', 'exists:students,id'],
             'date' => ['required', 'date'],
         ];
     }

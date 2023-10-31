@@ -30,12 +30,14 @@
             <form action="{{ route('bulletins.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <input type="number" class="form-control" name="code" value="{{ old('login') ?? '' }}" placeholder="Código ou CPF">
-                    @error('code')
+                    <label for="code">ID do Aluno</label>
+                    <input type="number" class="form-control" name="id" value="{{ old('id') ?? '' }}">
+                    @error('id')
                         <div class="text-dange mt-1">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="code">Data de Nascimento</label>
                     <input type="date" class="form-control" name="date" value="{{ old('date') ?? '' }}" placeholder="Data de Nascimento">
                     @error('date')
                     <div class="text-dange mt-1">{{ $message }}</div>

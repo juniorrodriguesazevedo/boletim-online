@@ -10,7 +10,10 @@
                             <h3 class="card-title">Lançamento de Notas</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('notes.index') }}" class="btn btn-sm btn-primary">Volta</a>
+                            {!! Form::open(['route' => 'notes.index', 'method' => 'GET']) !!}
+                            <input type="hidden" name="class_room_id" value="{{ $classRoom->id }}">
+                            {!! Form::submit('Voltar', ['class' => 'btn btn-sm btn-primary']) !!}
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>

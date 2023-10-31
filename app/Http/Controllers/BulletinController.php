@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note;
 use App\Models\Student;
+use App\Models\ClassRoom;
+use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Bulletins\BulletinStoreRequest;
 
 class BulletinController extends Controller
@@ -10,7 +15,7 @@ class BulletinController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         return view('bulletins.index');
     }
@@ -18,28 +23,34 @@ class BulletinController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function store(BulletinStoreRequest $request)
+    public function store(BulletinStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-        $student = Student::where('id', $data['code'])
+        $student = Student::where('id', $data['id'])
             ->where('birth_date', $data['date'])
             ->first();
 
         if (!$student) {
             return redirect()
                 ->back()
-                ->withErrors(['code' => 'Aluno não encontrado. Verifique os dados.']);
+                ->withErrors(['id' => 'Aluno não encontrado. Verifique os dados.']);
         }
 
-        dd($student);
+        return redirect()->route('bulletins.show', $student->id);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function show(Request $request, Student $student)
     {
-        //
+        $classRoom = ClassRoom::find($request->class_room_id);
+
+        $notes = Note::where('class_room_id', $classRoom->id)
+            ->where('student_id', $student->id)
+            ->get();
+
+        return view('bulletins.show', compact('student', 'classRoom', 'notes'));
     }
 }
