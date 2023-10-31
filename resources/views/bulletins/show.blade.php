@@ -36,15 +36,15 @@
                 <caption><strong>N. Registros: {{ $classRoom->disciplines->count() }}</strong></caption>
                 <thead class="text-primary">
                     <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col" style="width: 100px">N1</th>
-                        <th scope="col" style="width: 70px">F1</th>
-                        <th scope="col" style="width: 100px">N2</th>
-                        <th scope="col" style="width: 70px">F2</th>
-                        <th scope="col" style="width: 100px">N3</th>
-                        <th scope="col" style="width: 70px">F3</th>
-                        <th scope="col" style="width: 100px">N4</th>
-                        <th scope="col" style="width: 70px">F4</th>
+                        <th scope="col" style="width: 250px">Nome</th>
+                        <th scope="col" style="width: 50px">N1</th>
+                        <th scope="col" style="width: 40px">F1</th>
+                        <th scope="col" style="width: 50px">N2</th>
+                        <th scope="col" style="width: 40px">F2</th>
+                        <th scope="col" style="width: 50px">N3</th>
+                        <th scope="col" style="width: 40px">F3</th>
+                        <th scope="col" style="width: 50px">N4</th>
+                        <th scope="col" style="width: 40px">F4</th>
                         <th scope="col" style="width: 80px">Média</th>
                         <th scope="col" style="width: 80px">Faltas</th>
                     </tr>
