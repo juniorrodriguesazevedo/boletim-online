@@ -43,8 +43,12 @@ class BulletinController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, Student $student)
+    public function show(Request $request, int $id)
     {
+        $student = Student::where('id', $id)
+            ->select('id', 'name')
+            ->first();
+
         $classRoom = ClassRoom::find($request->class_room_id);
 
         $notes = Note::where('class_room_id', $classRoom->id)
