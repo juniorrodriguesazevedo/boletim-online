@@ -38,10 +38,11 @@
                 </div>
                 <div class="form-group">
                     <label for="code">Data de Nascimento</label>
-                    <input type="date" class="form-control" name="date" value="{{ old('date') ?? '' }}" placeholder="Data de Nascimento">
+                    <input type="text" id="dateMask" class="form-control" name="date" value="{{ old('date') ?? '' }}"
+                        placeholder="__/__/____">
                     @error('date')
-                    <div class="text-dange mt-1">{{ $message }}</div>
-                @enderror
+                        <div class="text-dange mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Entrar</button>
             </form>
@@ -49,8 +50,13 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#dateMask').inputmask("99/99/9999");
+        });
+    </script>
 </body>
 
 </html>
