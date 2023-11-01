@@ -45,15 +45,18 @@ class BulletinController extends Controller
      */
     public function show(Request $request, int $id)
     {
+        $notes = null;
         $student = Student::where('id', $id)
             ->select('id', 'name')
             ->first();
 
         $classRoom = ClassRoom::find($request->class_room_id);
 
-        $notes = Note::where('class_room_id', $classRoom->id)
-            ->where('student_id', $student->id)
-            ->get();
+        if ($classRoom) {
+            $notes = Note::where('class_room_id', $classRoom->id)
+                ->where('student_id', $student->id)
+                ->get();
+        }
 
         return view('bulletins.show', compact('student', 'classRoom', 'notes'));
     }
