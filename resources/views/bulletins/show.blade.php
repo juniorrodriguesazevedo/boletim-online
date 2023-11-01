@@ -18,7 +18,7 @@
 <body>
     <div class="col-12 d-flex justify-content-center">
         <div class="col-md-6 mt-5">
-            <div class="col-12 text-center mb-3 h4"><strong>#{{$student->id}} - {{ $student->name }} <br></div></strong>
+            <div class="col-12 text-center mb-3"><strong>#{{$student->id}} - {{ $student->name }} <br></div></strong>
             {!! Form::open(['route' => ['bulletins.show', $student->id], 'method' => 'GET']) !!}
             <div class="input-group mb-3">
                 {!! Form::select(
@@ -93,7 +93,7 @@
             </table>
         </div>
     @endisset
-    
+
     <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
 
     <script>
