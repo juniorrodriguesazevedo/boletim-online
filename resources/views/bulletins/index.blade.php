@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label for="code">Data de Nascimento</label>
-                    <input type="text" id="dateMask" class="form-control" name="date" value="{{ old('date') ?? '' }}"
+                    <input type="number" id="dateMask" class="form-control" name="date" value="{{ old('date') ?? '' }}"
                         placeholder="__/__/____">
                     @error('date')
                         <div class="text-dange mt-1">{{ $message }}</div>
