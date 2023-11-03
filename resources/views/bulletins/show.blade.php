@@ -39,22 +39,21 @@
     </div>
 
     @isset($classRoom)
-    <div class="text-center mt-2 mb-4 font-small">
-        <strong>Código: </strong> {{ $classRoom->code }} <br>
-        <strong>Turma: </strong> {{ $classRoom->name }} <br>
-        <strong>Período: </strong> {!! period($classRoom->period) !!} <br>
-        <strong>Ano: </strong> {{ $classRoom->year }} <br>
-        <strong>Professores:</strong>
-        <p style="list-style-type: none; display: inline;">
-            @foreach ($classRoom->users as $user)
-                <span style="display: inline-block;">{{ $user->name }}</span>
-                @if (!$loop->last)
-                    -
-                @endif
-            @endforeach
-        </p>
-    </div>
-
+        <div class="text-center mt-2 mb-4 font-small">
+            <strong>Código: </strong> {{ $classRoom->code }} <br>
+            <strong>Turma: </strong> {{ $classRoom->name }} <br>
+            <strong>Período: </strong> {!! period($classRoom->period) !!} <br>
+            <strong>Ano: </strong> {{ $classRoom->year }} <br>
+            <strong>Professores:</strong>
+            <p style="list-style-type: none; display: inline;">
+                @foreach ($classRoom->users as $user)
+                    <span style="display: inline-block;">{{ $user->name }}</span>
+                    @if (!$loop->last)
+                        -
+                    @endif
+                @endforeach
+            </p>
+        </div>
         <div class="col-12 d-flex justify-content-center table-responsive">
             <table class="table table-striped table-sm table-bordered col-md-6" style="font-size: small;">
                 <caption><strong>N. de Disciplinas: {{ $classRoom->disciplines->count() }}</strong></caption>
@@ -85,44 +84,28 @@
                             <td class="lack">{{ $notes->where('discipline_id', $discipline->id)->first()->lack3 ?? '' }}</td>
                             <td class="note">{{ $notes->where('discipline_id', $discipline->id)->first()->note4 ?? '' }}</td>
                             <td class="lack">{{ $notes->where('discipline_id', $discipline->id)->first()->lack4 ?? '' }}</td>
-                            <td class="media"></td>
-                            <td class="faltas"></td>
+                            <td>
+                                {{ calculateAverage(
+                                    $notes->where('discipline_id', $discipline->id)->first()->note1,
+                                    $notes->where('discipline_id', $discipline->id)->first()->note2,
+                                    $notes->where('discipline_id', $discipline->id)->first()->note3,
+                                    $notes->where('discipline_id', $discipline->id)->first()->note4,
+                                ) }}
+                            </td>
+                            <td>
+                                {{ calculateTotalLacks(
+                                    $notes->where('discipline_id', $discipline->id)->first()->lack1,
+                                    $notes->where('discipline_id', $discipline->id)->first()->lack2,
+                                    $notes->where('discipline_id', $discipline->id)->first()->lack3,
+                                    $notes->where('discipline_id', $discipline->id)->first()->lack4,
+                                ) }}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     @endisset
-
-    <script src="{{ asset('white') }}/js/core/jquery.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('tbody tr').each(function() {
-                const noteElements = $(this).find('td.note');
-                const lackElements = $(this).find('td.lack');
-
-                let totalNotes = 0;
-                let totalLacks = 0;
-
-                noteElements.each(function() {
-                    const note = parseFloat($(this).text()) || 0;
-                    totalNotes += note;
-                });
-
-                lackElements.each(function() {
-                    const lack = parseInt($(this).text()) || 0;
-                    totalLacks += lack;
-                });
-
-                const media = (totalNotes / (noteElements.length || 1)).toFixed(1);
-                const faltas = totalLacks;
-
-                $(this).find('td.media').text(media);
-                $(this).find('td.faltas').text(faltas);
-            });
-        });
-    </script>
 </body>
 
 </html>

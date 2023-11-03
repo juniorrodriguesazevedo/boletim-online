@@ -94,8 +94,22 @@
                                                 class="form-control lack-input"
                                                 value="{{ old('notes.' . $student->id . '.lack4', $notes->where('student_id', $student->id)->first()->lack4 ?? '') }}">
                                         </td>
-                                        <td id="media-{{ $student->id }}"></td>
-                                        <td id="faltas-{{ $student->id }}"></td>
+                                        <td>
+                                            {{ calculateAverage(
+                                                $notes->where('student_id', $student->id)->first()->note1,
+                                                $notes->where('student_id', $student->id)->first()->note2,
+                                                $notes->where('student_id', $student->id)->first()->note3,
+                                                $notes->where('student_id', $student->id)->first()->note4,
+                                            ) }}
+                                        </td>
+                                        <td>
+                                            {{ calculateTotalLacks(
+                                                $notes->where('student_id', $student->id)->first()->lack1,
+                                                $notes->where('student_id', $student->id)->first()->lack2,
+                                                $notes->where('student_id', $student->id)->first()->lack3,
+                                                $notes->where('student_id', $student->id)->first()->lack4,
+                                            ) }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -129,34 +143,6 @@
 
             $('.lack-input').on('input', function() {
                 this.value = this.value.replace(/[^0-9]/g, '');
-            });
-
-            const calculateMediaAndFaltas = function(studentId) {
-                const note1 = parseFloat($(`input[name="notes[${studentId}][note1]"]`).val()) || 0;
-                const note2 = parseFloat($(`input[name="notes[${studentId}][note2]"]`).val()) || 0;
-                const note3 = parseFloat($(`input[name="notes[${studentId}][note3]"]`).val()) || 0;
-                const note4 = parseFloat($(`input[name="notes[${studentId}][note4]"]`).val()) || 0;
-
-                const lack1 = parseInt($(`input[name="notes[${studentId}][lack1]"]`).val()) || 0;
-                const lack2 = parseInt($(`input[name="notes[${studentId}][lack2]"]`).val()) || 0;
-                const lack3 = parseInt($(`input[name="notes[${studentId}][lack3]"]`).val()) || 0;
-                const lack4 = parseInt($(`input[name="notes[${studentId}][lack4]"]`).val()) || 0;
-
-                const media = ((note1 + note2 + note3 + note4) / 4).toFixed(1);
-                const faltas = lack1 + lack2 + lack3 + lack4;
-
-                $(`#media-${studentId}`).text(media);
-                $(`#faltas-${studentId}`).text(faltas);
-            };
-
-            $('.note-input, .lack-input').on('input', function() {
-                const studentId = $(this).attr('name').match(/\d+/)[0];
-                calculateMediaAndFaltas(studentId);
-            });
-
-            $('.note-input, .lack-input').each(function() {
-                const studentId = $(this).attr('name').match(/\d+/)[0];
-                calculateMediaAndFaltas(studentId);
             });
         });
     </script>

@@ -80,3 +80,31 @@ function ticketStatus($status): string
             return '<span class="badge badge-success">FINALIZADO</span>';
     }
 }
+
+function calculateAverage(...$notes): float
+{
+    $sum = 0;
+    $count = 0;
+
+    foreach ($notes as $note) {
+        if ($note !== null) {
+            $sum += $note;
+            $count++;
+        }
+    }
+
+    return $count > 0 ? ($sum / $count) : 0;
+}
+
+function calculateTotalLacks(...$lacks): int
+{
+    $totalLacks = 0;
+
+    foreach ($lacks as $lack) {
+        if (is_numeric($lack)) {
+            $totalLacks += $lack;
+        }
+    }
+
+    return $totalLacks;
+}

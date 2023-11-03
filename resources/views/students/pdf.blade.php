@@ -41,8 +41,8 @@
                         <td>{{ $note->lack3 }}</td>
                         <td>{{ $note->note4 }}</td>
                         <td>{{ $note->lack4 }}</td>
-                        <td>{{ ($note->note1 + $note->note2 + $note->note3 + $note->note4) / 4 }}</td>
-                        <td>{{ $note->lack1 + $note->lack2 + $note->lack3 + $note->lack4 }}</td>
+                        <td>{{ calculateAverage($note->note1, $note->note2, $note->note3, $note->note4) }}</td>
+                        <td>{{ calculateTotalLacks($note->lack1, $note->lack2, $note->lack3, $note->lack4) }}</td>
                     @endforeach
                 </tr>
             @endforeach
