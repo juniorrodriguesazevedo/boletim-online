@@ -22,18 +22,14 @@ Auth::routes([
     'confirm' => false
 ]);
 
-/* Route::middleware(['throttle:12,1'])->group(function () {
+Route::middleware(['throttle:10,1'])->group(function () {
     Route::get('/boletim', [BulletinController::class, 'index'])->name('bulletins.index');
     Route::get('/boletim/{student}', [BulletinController::class, 'show'])->name('bulletins.show');
 });
 
 Route::middleware(['throttle:5,1'])->group(function () {
     Route::post('/boletim', [BulletinController::class, 'store'])->name('bulletins.store');
-}); */
-
-Route::get('/boletim', [BulletinController::class, 'index'])->name('bulletins.index');
-Route::post('/boletim', [BulletinController::class, 'store'])->name('bulletins.store');
-Route::get('/boletim/{id}', [BulletinController::class, 'show'])->name('bulletins.show');
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
