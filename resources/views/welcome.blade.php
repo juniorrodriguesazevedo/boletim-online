@@ -87,7 +87,7 @@
 <body>
     <div class="landing-page">
         <header class="header">
-        <div class="menu">
+            <div class="menu">
                 <a href="{{ route('bulletins.index') }}">Boletim</a>
             </div>
             <div class="menu">
@@ -96,7 +96,13 @@
         </header>
         <main class="main-content">
             <h1 class="logo">Escola para Testes</h1>
-            <p class="tagline">Construindo o Futuro Juntos</p>
+            {{--             <p class="tagline">Construindo o Futuro Juntos</p>
+ --}}
+            <div style="line-height: 0;">
+                <p class="tagline">LOGIN DE TESTE</p>
+                <p class="tagline"><strong>Email: </strong>secretaria@admin.com</p>
+                <p class="tagline"><strong>Senha: </strong>secret</p>
+            </div>
         </main>
     </div>
 </body>
