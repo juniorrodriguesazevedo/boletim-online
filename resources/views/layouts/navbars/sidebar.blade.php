@@ -1,7 +1,7 @@
 <div class="sidebar">
     <div class="sidebar-wrapper">
         <div class="logo text-center">
-            <a href="" class="simple-text logo-normal">TANCREDO NEVES</a>
+            <a href="" class="simple-text logo-normal">ESCOLA TESTE</a>
         </div>
         <ul class="nav">
 
