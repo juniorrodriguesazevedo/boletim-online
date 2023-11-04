@@ -95,7 +95,7 @@
             </div>
         </header>
         <main class="main-content">
-            <h1 class="logo">Escola Municipal Tancredo Neves</h1>
+            <h1 class="logo">Escola para Testes</h1>
             <p class="tagline">Construindo o Futuro Juntos</p>
         </main>
     </div>

@@ -95,19 +95,19 @@
                                                 value="{{ old('notes.' . $student->id . '.lack4', $notes->where('student_id', $student->id)->first()->lack4 ?? '') }}">
                                         </td>
                                         <td>
-                                            {{ calculateAverage(
-                                                $notes->where('student_id', $student->id)->first()->note1,
-                                                $notes->where('student_id', $student->id)->first()->note2,
-                                                $notes->where('student_id', $student->id)->first()->note3,
-                                                $notes->where('student_id', $student->id)->first()->note4,
-                                            ) }}
+                                            {{ number_format(calculateAverage(
+                                                $notes->where('student_id', $student->id)->first()->note1 ?? null,
+                                                $notes->where('student_id', $student->id)->first()->note2 ?? null,
+                                                $notes->where('student_id', $student->id)->first()->note3 ?? null,
+                                                $notes->where('student_id', $student->id)->first()->note4 ?? null,
+                                            ), 1) }}
                                         </td>
                                         <td>
                                             {{ calculateTotalLacks(
-                                                $notes->where('student_id', $student->id)->first()->lack1,
-                                                $notes->where('student_id', $student->id)->first()->lack2,
-                                                $notes->where('student_id', $student->id)->first()->lack3,
-                                                $notes->where('student_id', $student->id)->first()->lack4,
+                                                $notes->where('student_id', $student->id)->first()->lack1 ?? null,
+                                                $notes->where('student_id', $student->id)->first()->lack2 ?? null,
+                                                $notes->where('student_id', $student->id)->first()->lack3 ?? null,
+                                                $notes->where('student_id', $student->id)->first()->lack4 ?? null,
                                             ) }}
                                         </td>
                                     </tr>

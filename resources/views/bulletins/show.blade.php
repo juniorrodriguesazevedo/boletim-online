@@ -85,19 +85,19 @@
                             <td class="note">{{ $notes->where('discipline_id', $discipline->id)->first()->note4 ?? '' }}</td>
                             <td class="lack">{{ $notes->where('discipline_id', $discipline->id)->first()->lack4 ?? '' }}</td>
                             <td>
-                                {{ calculateAverage(
-                                    $notes->where('discipline_id', $discipline->id)->first()->note1,
-                                    $notes->where('discipline_id', $discipline->id)->first()->note2,
-                                    $notes->where('discipline_id', $discipline->id)->first()->note3,
-                                    $notes->where('discipline_id', $discipline->id)->first()->note4,
-                                ) }}
+                                {{ number_format(calculateAverage(
+                                    $notes->where('discipline_id', $discipline->id)->first()->note1 ?? null,
+                                    $notes->where('discipline_id', $discipline->id)->first()->note2 ?? null,
+                                    $notes->where('discipline_id', $discipline->id)->first()->note3 ?? null,
+                                    $notes->where('discipline_id', $discipline->id)->first()->note4 ?? null,
+                                ), 1) }}
                             </td>
                             <td>
                                 {{ calculateTotalLacks(
-                                    $notes->where('discipline_id', $discipline->id)->first()->lack1,
-                                    $notes->where('discipline_id', $discipline->id)->first()->lack2,
-                                    $notes->where('discipline_id', $discipline->id)->first()->lack3,
-                                    $notes->where('discipline_id', $discipline->id)->first()->lack4,
+                                    $notes->where('discipline_id', $discipline->id)->first()->lack1 ?? null,
+                                    $notes->where('discipline_id', $discipline->id)->first()->lack2 ?? null,
+                                    $notes->where('discipline_id', $discipline->id)->first()->lack3 ?? null,
+                                    $notes->where('discipline_id', $discipline->id)->first()->lack4 ?? null,
                                 ) }}
                             </td>
                         </tr>
