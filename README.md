@@ -12,7 +12,7 @@ Site em produção: https://boletimonline.online
 * Navegue para `http://localhost:8000`. O aplicativo será carregado automaticamente.
 
 #### Observações:
-* Ao propagar o banco ele já vem com usuário cadastrados:
+* Ao propagar o banco ele já vem com usuários cadastrados:
 
 ```
 Tipo: Super Admin
